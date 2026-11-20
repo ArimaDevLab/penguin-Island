@@ -53,7 +53,7 @@
   <div class="kicker">PRESS KIT</div>
   <h1>ペンギンタウン 3D</h1>
   <p class="lead">ペンギンたちが氷のブロックで街をつくるのを、ただ眺めるだけの癒しゲーム。ブラウザですぐに遊べます。</p>
-  <div class="btns"><a class="btn p" href="../">🐧 ゲームを遊ぶ</a><a class="btn s" href="presskit.zip" download>⬇ 素材をまとめてダウンロード（ZIP）</a></div>
+  <div class="btns"><a class="btn p" href="../">🐧 ゲームを遊ぶ</a><a class="btn s" href="presskit.zip" download>⬇ 素材をまとめてダウンロード（ZIP）</a><a class="btn s" href="en/">English</a></div>
 </div></header>
 <main>
 <section>
@@ -113,6 +113,7 @@
 URL：https://penguin-island.vercel.app/
 プレスキット：https://penguin-island.vercel.app/press/
 ソースコード：https://github.com/ArimaDevLab/penguin-island
+お問い合わせ：arima.dev.lab@outlook.jp
 
 ゲーム実況・配信・スクリーンショットの掲載は自由です。</div>
 </section>
@@ -137,11 +138,11 @@ URL：https://penguin-island.vercel.app/
   <p>このページの画像・動画・文章は、記事やSNS、動画での紹介に自由にお使いください。トリミングや縮小も問題ありません。ゲーム実況・配信・収益化も歓迎です。</p>
 </section>
 </main>
-<footer>© 2026 ArimaDevLab ・ <a href="../">ペンギンタウン 3D を遊ぶ</a></footer>
+<footer>© 2026 ArimaDevLab ・ <a href="../">ペンギンタウン 3D を遊ぶ</a> ・ <a href="en/">English</a></footer>
 <div class="toast" id="toast">コピーしました</div>
 <script>
 // 連絡先を載せる場合はここに書く（例: 'mail@example.com' や 'X: @account'）。空なら行ごと非表示。
-const CONTACT='';
+const CONTACT='arima.dev.lab@outlook.jp';
 if(CONTACT){document.getElementById('contact').textContent=CONTACT;document.getElementById('contactRow').hidden=false}
 const SHOTS=[['01_day_wide','昼の島'],['02_sunset_pov','夕焼けとペンギン'],['03_rookery','営巣地'],['04_town_close','こうえんと街'],['05_night_aurora','夜とオーロラ'],['06_whale','クジラのジャンプ'],['07_phone','スマホでの画面']];
 document.getElementById('gallery').innerHTML=SHOTS.map(([f,t])=>`<figure class="shot${f==='07_phone'?' tall':''}" style="margin:0"><a href="images/${f}.jpg" target="_blank"><img src="images/${f}_thumb.jpg" alt="${t}" loading="lazy"></a><div><span>${t}</span><a href="images/${f}.jpg" download>⬇ 原寸</a></div></figure>`).join('');

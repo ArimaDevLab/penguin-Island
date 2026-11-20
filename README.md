@@ -1,4 +1,10 @@
-# 🐧 ペンギンタウン 3D
+# 🐧 ペンギンタウン 3D / Penguin Town 3D
+
+- 日本語版: https://penguin-island.vercel.app/
+- English: https://penguin-island.vercel.app/en/
+- プレスキット / Press kit: https://penguin-island.vercel.app/press/ ・ https://penguin-island.vercel.app/press/en/
+
+> **English**: A cozy browser game where you just watch Adélie penguins build a town out of ice blocks. They haul ice, build igloos, houses, a park and a lighthouse, bridge over to new islands, raise chicks in a rookery, and once in a while a humpback whale breaches out at sea. Free, no install. The game opens in English automatically when your browser isn’t set to Japanese, and you can switch languages from the 📋 panel.
 
 ペンギンたちが氷のブロックで街をつくっていくのを、ただ眺めるだけの癒しゲームです。
 
@@ -33,7 +39,10 @@
 | `src/game.template.html` | ゲームのソース（`__GLB__` の部分にモデルが入ります） |
 | `assets/penguins.glb` | ペンギン（大人・ヒナ）とクジラの3Dモデル |
 | `tools/make_penguin.py` | モデルを作る Blender（bpy）スクリプト |
-| `tools/build.py` | モデルを埋め込んで `index.html` を作るスクリプト |
+| `en/index.html` | 英語版（ビルドで自動生成） |
+| `tools/build.py` | モデルを埋め込んで `index.html` と `en/index.html` を作るスクリプト |
+| `tools/i18n_en.py` | 英語版の翻訳表 |
+| `press/` | プレスキット（日本語・英語） |
 
 ## ビルド
 

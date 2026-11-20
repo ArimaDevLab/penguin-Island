@@ -12,6 +12,9 @@
 <meta property="og:url" content="https://penguin-island.vercel.app/">
 <meta name="twitter:image" content="https://penguin-island.vercel.app/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<script>(function(){try{if(/claude/.test(location.hostname))return;var K='penguin-town-lang',q=new URLSearchParams(location.search).get('lang'),p=localStorage.getItem(K);if(q==='en'||q==='ja'){localStorage.setItem(K,q);p=q}
+var en=document.documentElement.lang==='en',want=p||((navigator.language||'').toLowerCase().indexOf('ja')===0?'ja':'en');
+if(want==='en'&&!en)location.replace('en/'+location.search);else if(want==='ja'&&en)location.replace('../'+location.search)}catch(e){}})()</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐧</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800&display=swap" rel="stylesheet">
 <style>
@@ -82,6 +85,7 @@
   #iTrack .e{font-size:52px;line-height:1.1}#iTrack h3{margin:8px 0 6px;font-size:19px}#iTrack p{margin:0;font-size:13.5px;line-height:1.7;color:#55607a}
   #iDots{display:flex;gap:6px;justify-content:center;margin:14px 0 12px}#iDots i{width:7px;height:7px;border-radius:50%;background:#d8e2ee;transition:all .3s}#iDots i.on{background:#2c3550;width:18px;border-radius:4px}
   #iBtns{display:flex;gap:8px}#iBtns button{flex:1;box-shadow:none;background:#eef3f9;font-size:14px;padding:11px}#iBtns button.main{background:#5be08a;color:#fff}
+  .claudehost .langBtn{display:none}
   #photo{position:fixed;right:calc(env(safe-area-inset-right) + 12px);top:calc(env(safe-area-inset-top) + 10px);z-index:5;font-size:16px;padding:8px 11px}
   body.photo #photo{display:none}
   .tag{position:absolute;transform:translate(-50%,-100%);background:rgba(255,255,255,.92);color:#2c3550;font-size:11px;font-weight:800;padding:3px 8px 5px;border-radius:9px;white-space:nowrap;box-shadow:0 2px 6px rgba(20,40,80,.18)}
@@ -290,7 +294,7 @@ function toScreen(x,y,z){v3.set(x,y,z).project(camera);return{x:(v3.x+1)/2*inner
 function floatTxt(x,y,z,txt,color){const s=toScreen(x,y,z);if(!s.ok)return;const d=document.createElement('div');d.className='fl';d.textContent=txt;d.style.left=s.x+rr(-8,8)+'px';d.style.top=s.y+'px';d.style.color=color;d.style.fontSize=(txt==='z'?14:16)+'px';fx.appendChild(d);setTimeout(()=>d.remove(),1600)}
 const hearts=(p,n=1)=>{for(let i=0;i<n;i++)setTimeout(()=>floatTxt(p.x,GY+1.05,p.z,'♥','#ff7fa3'),i*150)};
 function say(p,t,d=2.4){p.bubble=t;p.bubbleT=d;if(SND&&SND.on)voice(p,p.state==='display'?'ecstatic':p.baby?'peep':'gaa')}
-let logT=0;const logEl=document.getElementById('log');var OFF=false;function log(m){if(OFF)return;logEl.textContent=m;logEl.style.opacity=1;logT=4.5}
+let logT=0;const logEl=document.getElementById('log');if(/claude/.test(location.hostname))document.documentElement.classList.add('claudehost');var OFF=false;function log(m){if(OFF)return;logEl.textContent=m;logEl.style.opacity=1;logT=4.5}
 
 // ---------- buildings ----------
 const TYPES={igloo:{need:8,name:'イグルー',r:1.2},house:{need:10,name:'おうち',r:1.2},shop:{need:10,name:'さかな屋さん',r:1.2},tower:{need:14,name:'氷のとう',r:.9},lighthouse:{need:18,name:'とうだい',r:.9},bridge:{need:14,name:'橋',r:.8},park:{need:12,name:'こうえん',r:1.75}};
@@ -859,13 +863,13 @@ function renderProg(){shTitle.textContent='📋 いま作っているもの';con
     h+=`<div class="row"><div class="ic">${ICON[b.type]}</div><div class="mid"><div class="nm">${b.req?'⭐ ':''}${T.name} <span style="font-weight:500;color:#7a8499">${b.prog}/${b.need}</span></div><div class="sub">${isl}・🐧 ${w}羽が作業中</div><div class="bar"><i style="width:${pc}%"></i></div></div>
       <button data-a="look" data-i="${i}">👀</button>${(b.type==='bridge'&&!b.req)||b.type==='lighthouse'?'':`<button data-a="cancel" data-i="${i}" class="${b._cf&&perfT-b._cf<3?'warn':''}">${b._cf&&perfT-b._cf<3?'ほんとに？':'✕'}</button>`}</div>`});
   const done={};blds.forEach(b=>{if(b.done)done[b.type]=(done[b.type]||0)+1});const ch=Object.keys(done).map(k=>`<span>${ICON[k]} ${TYPES[k].name} ×${done[k]}</span>`).join('');
-  if(ch)h+=`<div class="note" style="padding-top:14px">できあがったもの</div><div class="chips">${ch}</div>`;h+='<div style="text-align:center;padding-top:16px"><button data-a="help" data-i="-1" style="box-shadow:none;background:#eef3f9;font-size:12px;color:#7a8499;margin-right:6px">❓ あそびかた</button><button data-a="reset" data-i="-1" style="box-shadow:none;background:#eef3f9;font-size:12px;color:#7a8499">↺ 街をはじめからつくりなおす</button></div>';shBody.innerHTML=h}
+  if(ch)h+=`<div class="note" style="padding-top:14px">できあがったもの</div><div class="chips">${ch}</div>`;h+='<div style="text-align:center;padding-top:16px"><button data-a="help" data-i="-1" style="box-shadow:none;background:#eef3f9;font-size:12px;color:#7a8499;margin-right:6px">❓ あそびかた</button><button data-a="lang" data-i="-1" class="langBtn" style="box-shadow:none;background:#eef3f9;font-size:12px;color:#7a8499;margin-right:6px">🌐 English</button><button data-a="reset" data-i="-1" style="box-shadow:none;background:#eef3f9;font-size:12px;color:#7a8499">↺ 街をはじめからつくりなおす</button></div>';shBody.innerHTML=h}
 const BMENU=['igloo','house','shop','tower','park','lighthouse','bridge'];
 function renderBuild(){shTitle.textContent='🏗 なにを建てる？';const rq=activeSites().filter(b=>b.req).length;
   let h='<div class="grid">';BMENU.forEach(t=>{const off=(t==='lighthouse'&&blds.some(b=>b.type==='lighthouse'))||rq>=4;h+=`<div class="card ${off?'off':''}" data-t="${t}"><span class="e">${ICON[t]}</span>${TYPES[t].name}<small>${t==='bridge'?'島と島をつなぐ':'こおり ×'+TYPES[t].need}</small></div>`});
   h+='</div><div class="note">'+(rq>=4?'おねがいは4つまで。いまのが終わるのを待ってね':'えらんだら、島の上の置きたい場所をタップ。ペンギンたちが優先して作ってくれるよ')+'</div>';shBody.innerHTML=h}
 shBody.addEventListener('click',e=>{const c=e.target.closest('[data-t]');if(c&&!c.classList.contains('off')){startPlace(c.dataset.t);return}
-  const bt=e.target.closest('button[data-a]');if(!bt)return;if(bt.dataset.a==='fw'){const p=pens[+bt.dataset.n];if(p){closeSheet();camOn=true;camLock=true;camP=p;camT=1e9;camBtn.style.background='#ffe38a';log(`📷 ${p.name} を見守り中…`)}return}if(bt.dataset.a==='help'){closeSheet();openIntro();return}if(bt.dataset.a==='reset'){closeSheet();cf.style.display='flex';return}const b=blds[+bt.dataset.i];if(!b)return;
+  const bt=e.target.closest('button[data-a]');if(!bt)return;if(bt.dataset.a==='fw'){const p=pens[+bt.dataset.n];if(p){closeSheet();camOn=true;camLock=true;camP=p;camT=1e9;camBtn.style.background='#ffe38a';log(`📷 ${p.name} を見守り中…`)}return}if(bt.dataset.a==='lang'){const en=document.documentElement.lang==='en';try{localStorage.setItem('penguin-town-lang',en?'ja':'en')}catch(e){}location.href=en?'../':'en/';return}if(bt.dataset.a==='help'){closeSheet();openIntro();return}if(bt.dataset.a==='reset'){closeSheet();cf.style.display='flex';return}const b=blds[+bt.dataset.i];if(!b)return;
   if(bt.dataset.a==='look'){closeSheet();if(camOn){camOn=false;camBtn.style.background=''}const tx=b.type==='bridge'?(b.A.x+b.B.x)/2:b.x,tz=b.type==='bridge'?(b.A.z+b.B.z)/2:b.z;Object.assign(camGoal,{tx,tz,dist:10,pitch:.62});lastUser=perfT}
   else if(bt.dataset.a==='cancel'){if(b._cf&&perfT-b._cf<3){cancelSite(b)}else b._cf=perfT;renderProg()}});
 function cancelSite(b){if(b.type==='bridge')BRIDGES.splice(BRIDGES.indexOf(b),1);b.done=true;b.cancel=true;scene.remove(b.g);blds.splice(blds.indexOf(b),1);rebuildObs();log(`${TYPES[b.type].name} の工事をやめたよ`);setTimeout(ensureSites,500)}
